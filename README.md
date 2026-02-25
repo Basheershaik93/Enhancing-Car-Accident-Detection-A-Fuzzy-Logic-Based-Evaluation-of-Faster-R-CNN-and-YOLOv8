@@ -32,8 +32,7 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 
 **Citation** (update DOI once available):
 
-**bibtex**
-@inproceedings{basheer2026enhancing,
+@inproceedings{
   author    = {Shaik Basheer and Chanchal Biswas and Dunga Priyatham and Shaik Abdul Karim and Abdul Rehan},
   title     = {Enhancing Car Accident Detection: A Fuzzy Logic-based Evaluation of Faster R-CNN and YOLOv8},
   booktitle = {2026 5th International Conference on Communication, Computing and Electronics Systems (ICCCES)},
@@ -67,27 +66,42 @@ Git LFS (for handling large dataset files): Install via git-lfs.com
 
 **Setup**
 
-**1. Clone the repository**
+**1. Clone the repository:**
+
 git clone https://github.com/Basheershaik93/Enhancing-Car-Accident-Detection-A-Fuzzy-Logic-Based-Evaluation-of-Faster-R-CNN-and-YOLOv8.git
 cd Enhancing-Car-Accident-Detection-A-Fuzzy-Logic-Based-Evaluation-of-Faster-R-CNN-and-YOLOv8
+
 **2. Install Git LFS (for the large dataset zip)**
+
 git lfs install
 git lfs pull
+
 **3. Install dependencies**
+
 pip install -r requirements.txt  # If requirements.txt is added; otherwise, install manually
  Note: Required packages: torch, ultralytics (for YOLOv8), torchvision (for Faster R-CNN), scikit-fuzzy, numpy, opencv-python, matplotlib, pandas.
+ 
 **Usage**
+
 **1. Unzip Dataset:**
+
   unzip Dataset/high_quality_pictures.zip -d Dataset/
+  
 **2. Train Models**
+
  . Run Yolo_V8_training_(1).ipynb for YOLOv8.
  . Run Faster_R_CNN.ipynb for Faster R-CNN.
+ 
 **3. Fuzzy Logic Confusion:**
+
 . Use FUZZY_Logic.ipynb to process confidence scores and generate fused outputs.
+
 **4. Evaluation:**
+
 . Run confidence_of_the_both_models_.ipynb to compare mAP@0.5 and other metrics.
    Example command for inference (adapt from notebooks):
     python infer.py --model yolov8.pt --source video.mp4
+    
 
 ## Results
 
@@ -96,6 +110,7 @@ pip install -r requirements.txt  # If requirements.txt is added; otherwise, inst
 | Faster R-CNN       | 80.1%   | High            | ~150                 | Strong on precision, slower        |
 | YOLOv8             | 99.5%   | Moderate        | ~20                  | Very fast, higher false positives  |
 | **Hybrid (Fuzzy)** | **90.3%** | **Low**       | ~35                  | Best balance – reduced false alarms by ~40% in low-visibility scenarios |
+
 The hybrid approach reduces false positives by 40% in low-visibility scenarios while maintaining real-time performance.
 
 **Contributors**
