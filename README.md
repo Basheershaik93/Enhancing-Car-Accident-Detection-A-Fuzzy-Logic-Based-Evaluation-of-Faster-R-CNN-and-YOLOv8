@@ -45,7 +45,6 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 
 ## Repository Structure
 
-```text
 ├── Dataset/
 │   └── high_quality_pictures.zip          # Custom dataset (~366 MB – unzip before use)
 ├── ICCES-1032 Original Source File/       # Original conference submission materials
