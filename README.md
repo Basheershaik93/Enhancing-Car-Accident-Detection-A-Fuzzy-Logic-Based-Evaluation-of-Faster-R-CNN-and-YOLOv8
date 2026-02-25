@@ -116,9 +116,13 @@ The hybrid approach reduces false positives by 40% in low-visibility scenarios w
 **Contributors**
 
 Shaik Basheer
+
 Chanchal Biswas 
+
 Dunga Priyatham 
+
 Shaik Abdul Karim
+
 Abdul Rehan 
 
 All affiliated with Dept. of Computer Science and Engineering, SRM University AP, Neerukonda, Andhra Pradesh, India.
@@ -129,5 +133,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 **Acknowledgments**
 
 Presented at ICCCES-2026 .
+
 Thanks to SRM University AP for support.
+
 Models built using Ultralytics YOLOv8 and PyTorch Faster R-CNN implementations.
