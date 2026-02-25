@@ -57,6 +57,47 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 ├── .gitattributes                         # Git LFS tracking rules for large files (*.zip)
 └── README.md                              # This file
 
+├── Dataset/
+│   └── high_quality_pictures.zip
+├── ICCES-1032 Original Source File/
+│   ├── conference_101719.pdf
+│   ├── conference_101719.tex
+│   ├── fig1.png
+│   ├── IEEEtran_HOWTO.pdf
+│   ├── IEEEtran.cls
+│   ├── Screenshot 2025-11-27 180154.png
+│   ├── Screenshot 2025-11-27 180508.png
+│   ├── Screenshot 2025-11-27 180723.png
+│   ├── Screenshot 2025-11-27 181014.png
+│   ├── Screenshot 2025-11-27 181253.png
+│   ├── Screenshot 2025-11-27 181435.png
+│   ├── Screenshot 2025-11-27 181631.png
+│   ├── Screenshot 2025-11-27 181854.png
+│   ├── Screenshot 2025-11-27 182046.png
+│   ├── Screenshot 2025-11-27 182152.png
+│   ├── Screenshot 2025-11-27 182327.png
+│   ├── Screenshot 2025-11-27 182613.png
+│   ├── Screenshot 2025-11-27 182725.png
+│   └── Screenshot 2025-11-27 183039.png
+├── Results/
+│   ├── Best Combinations preformed on the parameters of YOLOv8 model.jpg
+│   ├── Confusion Matrix.jpg
+│   ├── Final Decision Graph using Fuzzy Logic.jpg
+│   ├── Loss Function Graphs.jpg
+│   ├── Membership Functions.jpg
+│   ├── Performances of different optimizers on YOLOv8 model.jpg
+│   └── Training images generated through YOLOv8 Model.jpg
+├── .gitattributes
+├── .gitignore
+├── 230.pdf
+├── confidence_of_the_both_models_.ipynb
+├── Faster_R_CNN.ipynb
+├── FUZZY_Logic.ipynb
+├── LICENSE
+├── README.md
+└── Yolo_V8_training_ (1).ipynb
+
+
 ## Installation
 
 **Prerequisites**
