@@ -46,56 +46,26 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 
 ├── Dataset/
 │   └── high_quality_pictures.zip          # Custom dataset (~366 MB – unzip before use)
-├── ICCES-1032 Original Source File/       # Original conference submission materials
-├── Results/                               # Model outputs, confusion matrices, visualizations, metrics
-├── 230.pdf                                # Conference paper PDF (ICCCES 2026)
-├── FUZZY_Logic.ipynb                      # Fuzzy logic fusion & decision engine
-├── Faster_R_CNN.ipynb                     # Faster R-CNN training, evaluation & inference
-├── Yolo_V8_training_(1).ipynb             # YOLOv8 training pipeline & experiments
-├── confidence_of_the_both_models_.ipynb   # Confidence score analysis & model comparison
-├── .gitignore                             # Ignore rules for caches, temp files, large binaries
-├── .gitattributes                         # Git LFS tracking rules for large files (*.zip)
-└── README.md                              # This file
 
-├── Dataset/
-│   └── high_quality_pictures.zip
-├── ICCES-1032 Original Source File/
-│   ├── conference_101719.pdf
-│   ├── conference_101719.tex
-│   ├── fig1.png
-│   ├── IEEEtran_HOWTO.pdf
-│   ├── IEEEtran.cls
-│   ├── Screenshot 2025-11-27 180154.png
-│   ├── Screenshot 2025-11-27 180508.png
-│   ├── Screenshot 2025-11-27 180723.png
-│   ├── Screenshot 2025-11-27 181014.png
-│   ├── Screenshot 2025-11-27 181253.png
-│   ├── Screenshot 2025-11-27 181435.png
-│   ├── Screenshot 2025-11-27 181631.png
-│   ├── Screenshot 2025-11-27 181854.png
-│   ├── Screenshot 2025-11-27 182046.png
-│   ├── Screenshot 2025-11-27 182152.png
-│   ├── Screenshot 2025-11-27 182327.png
-│   ├── Screenshot 2025-11-27 182613.png
-│   ├── Screenshot 2025-11-27 182725.png
-│   └── Screenshot 2025-11-27 183039.png
-├── Results/
-│   ├── Best Combinations preformed on the parameters of YOLOv8 model.jpg
-│   ├── Confusion Matrix.jpg
-│   ├── Final Decision Graph using Fuzzy Logic.jpg
-│   ├── Loss Function Graphs.jpg
-│   ├── Membership Functions.jpg
-│   ├── Performances of different optimizers on YOLOv8 model.jpg
-│   └── Training images generated through YOLOv8 Model.jpg
-├── .gitattributes
-├── .gitignore
-├── 230.pdf
-├── confidence_of_the_both_models_.ipynb
-├── Faster_R_CNN.ipynb
-├── FUZZY_Logic.ipynb
-├── LICENSE
-├── README.md
-└── Yolo_V8_training_ (1).ipynb
+├── ICCES-1032 Original Source File/       # Original conference submission materials
+
+├── Results/                               # Model outputs, confusion matrices, visualizations, metrics
+
+├── 230.pdf                                # Conference paper PDF (ICCCES 2026)
+
+├── FUZZY_Logic.ipynb                      # Fuzzy logic fusion & decision engine
+
+├── Faster_R_CNN.ipynb                     # Faster R-CNN training, evaluation & inference
+
+├── Yolo_V8_training_(1).ipynb             # YOLOv8 training pipeline & experiments
+
+├── confidence_of_the_both_models_.ipynb   # Confidence score analysis & model comparison
+
+├── .gitignore                             # Ignore rules for caches, temp files, large binaries
+
+├── .gitattributes                         # Git LFS tracking rules for large files (*.zip)
+
+└── README.md                              # This file
 
 
 ## Installation
