@@ -33,12 +33,19 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 **Citation** (update DOI once available):
 
 @inproceedings{
+
   author    = {Shaik Basheer and Chanchal Biswas and Dunga Priyatham and Shaik Abdul Karim and Abdul Rehan},
+  
   title     = {Enhancing Car Accident Detection: A Fuzzy Logic-based Evaluation of Faster R-CNN and YOLOv8},
+  
   booktitle = {2026 5th International Conference on Communication, Computing and Electronics Systems (ICCCES)},
+  
   year      = {2026},
+  
   pages     = {1527--1532},
+  
   publisher = {IEEE},
+  
   doi       = {TBD}
 }
 
