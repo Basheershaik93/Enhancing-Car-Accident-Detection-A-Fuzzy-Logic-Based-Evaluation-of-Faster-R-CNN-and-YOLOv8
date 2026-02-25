@@ -1,0 +1,589 @@
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{url}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{longtable}
+
+\begin{document}
+
+\title{Enhancing Car Accident Detection: A Fuzzy Logic-Based Evaluation of Faster R-CNN and YOLOv8}
+
+\author{
+% --- 1st Author ---
+\IEEEauthorblockN{1\textsuperscript{st} Shaik Basheer}
+\IEEEauthorblockA{
+Dept. of Computer Science and Engineering\\
+SRM University AP\\
+Neerukonda, Andhra Pradesh-522240\\
+Email: shaikbasheer\_c@srmap.edu.in}
+\and
+
+% --- 2nd Author ---
+\IEEEauthorblockN{2\textsuperscript{nd} Chanchal Biswas}
+\IEEEauthorblockA{
+Dept. of Computer Science and Engineering\\
+SRM University AP\\
+Neerukonda, Andhra Pradesh-522240\\
+Email: chanchal\_biswas@srmap.edu.in}
+\and
+
+% --- 3rd Author ---
+\IEEEauthorblockN{3\textsuperscript{rd} Dunga Priyatham}
+\IEEEauthorblockA{
+Dept. of Electronics and Communication and Engineering\\
+SRM University AP\\
+Neerukonda, Andhra Pradesh-522240\\
+Email: priyatham\_dunga@srmap.edu.in}
+\and
+
+% --- 4th Author ---
+\IEEEauthorblockN{4\textsuperscript{th} Shaik Abdul Karim}
+\IEEEauthorblockA{
+Dept. of Computer Science and Engineering\\
+SRM University AP\\
+Neerukonda, Andhra Pradesh-522240\\
+Email: karim\_shaik@srmap.edu.in}
+\and
+
+% --- 5th Author ---
+\IEEEauthorblockN{5\textsuperscript{th} Abdul Rehan}
+\IEEEauthorblockA{
+Dept. of Computer Science and Engineering\\
+SRM University AP\\
+Neerukonda, Andhra Pradesh-522240\\
+Email: rehan\_abdul@srmap.edu.in}
+}
+
+
+\maketitle
+\begin{abstract}Real-time accident detection is essential for enhancing road safety and enabling quick emergency response. Models such as Faster R-CNN and YOLOv8 already offer strong performance, achieving detection accuracies of 80.1\% and 99.5\% (mAP@0.5), respectively. However, in challenging real-world scenarios—such as low visibility, occlusions, and overlapping objects—these models may produce inconsistent or conflicting predictions.To overcome this limitation, we propose a hybrid accident detection system that combines YOLOv8 and Faster R-CNN using a fuzzy logic-based decision mechanism. Confidence scores from both models are processed through fuzzy membership functions—Ignore, Uncertain, and Strong Detection—and a rule-based inference engine to produce a more stable and interpretable final output.Experiments on a custom dataset containing Car, Car Accident, and Fire Accident classes show that the hybrid approach achieves an improved mAP@0.5 of 90.3\%, reduces false positives, and delivers more reliable classification. These results demonstrate that fuzzy logic fusion effectively enhances the consistency and robustness of accident detection, making the system suitable for intelligent surveillance and real-time traffic monitoring.
+
+Index Terms—YOLOv8, Faster R-CNN, Accident Detection, Fuzzy Logic, Intelligent Transportation Systems, Real-Time Surveillance.
+\end{abstract}
+
+\section{INTRODUCTION}
+
+\subsection{Brief Introduction}
+Intelligent Transportation Systems (ITS) require fast and accurate accident detection, whereas manual monitoring is often slow and unreliable \cite{ref2}. Deep learning models such as YOLOv8 provide high-speed and reliable detection even under difficult conditions such as poor lighting or heavy traffic \cite{ref3,ref4}. Enhanced YOLOv8 variants that use BiFPN, GAM, improved loss functions, and small-object detection heads further boost performance \cite{ref5,ref6,ref7}. Lightweight versions like TP-YOLOv8 also support edge deployment \cite{ref9}. 
+
+This work builds on these advancements by integrating YOLOv8 and Faster R-CNN through fuzzy logic to achieve more consistent and accurate accident detection in real-time scenarios.
+
+\subsection{Project Objectives}
+\begin{itemize}
+  \item Develop a real-time detection system for accidents and fires.
+  \item Compare YOLOv8 and Faster R-CNN in terms of accuracy, speed, and reliability.
+  \item Use fuzzy logic to resolve uncertain or conflicting predictions.
+  \item Reduce false positives using a hybrid decision-making approach.
+  \item Validate the system on real accident footage under different conditions.
+  \item Support quicker and more accurate emergency response mechanisms.
+\end{itemize}
+
+\subsection{Project Significance}
+This work enhances accident detection by integrating deep learning with fuzzy logic to reduce false alarms and improve decision reliability. Traditional methods often misinterpret events, delaying emergency response. The proposed hybrid fusion of YOLOv8 and Faster R-CNN produces more consistent predictions, strengthening surveillance systems, improving detection speed, and contributing to safer road environments.
+
+Section~I introduces the problem and motivation. Section~II describes the proposed architecture. Section~III reviews related work. Section~IV explains dataset preparation, model training, and fuzzy integration. Section~V presents results and performance analysis. Section~VI visualizes the fuzzy decision surface and final classification.
+
+\section{PROPOSED WORK}This study proposes a hybrid accident detection model combining YOLOv8 and Faster R-CNN with fuzzy logic. Fuzzy logic merges the confidence scores from both detectors to produce a stable final decision.
+
+The system uses three membership categories: Ignore (low confidence), Uncertain (moderate confidence), and Strong Detection (high confidence). This ensures smooth transitions between decisions and improves reliability in challenging conditions like occlusions, overlapping objects, or low visibility.
+
+Overall, the framework reduces false detections, handles cases where one detector may fail, and provides consistent, robust real-time accident detection.
+\section{LITERATURE REVIEW}
+
+Daxin Tian et al. \cite{ref3} propose an accident detection system using Cooperative Vehicle-Infrastructure Systems (CVIS), achieving a detection time of 0.0461 seconds with 90.02\% AP.
+
+Akshaya et al. \cite{ref6} use YOLOv8 and ultrasonic sensors for proactive collision avoidance, demonstrating reliable obstacle detection for highway safety.
+
+Girija M et al. \cite{ref8} use deep learning to predict traffic accidents based on historical data, showing AI’s potential in risk assessment.
+
+Xingyu Liu et al. \cite{ref5} introduce BGS-YOLO, which uses background subtraction to improve object detection in dynamic traffic scenes.
+
+Jiahui Chen et al. \cite{ref10} develop an improved YOLOv8 model for IIoT-based accident detection, achieving higher efficiency and accuracy.
+
+Vasileios Efthymiou et al. \cite{ref1} compare CNN architectures for vehicle detection in V2X environments, analyzing detection accuracy and speed.
+
+Nitheesh Vijayan et al. \cite{ref4} study collision detection using machine learning with a focus on sensor fusion and predictive modeling.
+
+Jun Peng et al. \cite{ref7} improve YOLOv8 with better feature extraction for autonomous driving applications.
+
+Bharathi Mohan G et al. \cite{ref2} present an AI-based real-time accident detection and emergency response system using IoT integration.
+
+Zhaole Ning et al. \cite{ref9} introduce TP-YOLOv8, a lightweight model with attention mechanisms for efficient traffic accident recognition.
+
+Richa Singh et al. \cite{ref17} develop a Faster R-CNN-based accident detection system suitable for surveillance.
+
+Trung-Nghia Le et al. \cite{ref15} propose Attention R-CNN for improved accident detection using attention mechanisms.
+
+Mr. Shankar K et al. \cite{ref13} explore YOLOv8 improvements for safer terrain monitoring.
+
+Sheli Sinha Chaudhuri et al. \cite{ref16} compare YOLO and Faster R-CNN for vehicle detection in autonomous driving.
+
+R. Vasanthi et al. \cite{ref14} demonstrate YOLOv8 for real-time car damage detection.
+
+Prathilothamai M et al. \cite{ref11} design a YOLOv8-based system for detecting traffic violations.
+
+Siddhant Mishra et al. \cite{ref12} focus on vehicle damage detection using deep learning and discuss related challenges.
+
+
+\section{METHODOLOGY}
+
+\subsection{Research Design}The study focuses on real-time accident detection using machine learning models with fuzzy logic. YOLOv8 and Faster R-CNN classify three classes: Car, Car Accident, and Fire Accident. The Fuzzy Inference System (FIS) combines confidence scores from both models to produce a reliable final decision.
+
+\subsection{Data Collection & Preprocessing}
+\begin{enumerate}
+\item \textbf{Dataset:} Images of Car, Car Accident, and Fire Accident collected from real-time traffic cameras.
+\item \textbf{Annotation:} Labeled using Roboflow with bounding boxes. Dataset split:
+\begin{itemize}
+\item Training: 80%
+\item Validation: 4%
+\item Test: 16%
+\end{itemize}
+\item \textbf{Preprocessing:} Correct orientation and resize to 640 x 640 pixels for consistent input.
+\item \textbf{Augmentation:} Flipping, rotation, brightness/contrast adjustment, and Gaussian noise to improve generalization.
+\end{enumerate}
+
+These steps ensure a robust dataset suitable for real-world accident detection.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 180154.png}
+  \caption{Flow of data Pre-processing}
+  \label{fig:preprocess}
+\end{figure}
+
+As shown in Fig.~\ref{fig:preprocess}, the preprocessing pipeline standardizes the dataset through orientation correction, resizing, and augmentation to ensure consistent model input.
+
+\subsection{Model Training}
+
+
+\subsubsection{YOLOv8}
+YOLOv8 is an enhanced and faster iteration of the YOLO series, offering improved accuracy and efficiency. It uses a streamlined single-stage architecture that integrates feature extraction, object localization, and classification. With an upgraded backbone, optimized feature fusion, and multi-scale prediction, YOLOv8 effectively detects objects of varying sizes.  
+Additionally, it provides multiple model variants to balance speed and accuracy depending on hardware capabilities, making it a flexible and robust choice for real-time object detection tasks.
+
+
+\subsection{YOLOv8 Framework}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 180508.png}
+  \caption{YOLOv8 framework.}
+  \label{fig:yolov8_framework}
+\end{figure}
+
+As shown in Fig.~\ref{fig:yolov8_framework}, the framework includes feature extraction, detection heads, and prediction layers for bounding boxes and class probabilities.
+
+AAs mentioned above, YOLOv8 consists of three primary components in its architecture:
+\begin{itemize}
+  \item Backbone
+  \item Neck
+  \item Head
+\end{itemize}
+
+The Backbone serves as the main convolutional network responsible for extracting key features from input images. YOLOv8 employs a customized CSPDarknet53 with cross-stage partial connections to enhance information flow and improve detection accuracy.
+
+The Neck aggregates feature maps from multiple backbone layers, enabling effective multi-scale object detection.
+
+Instead of a standard FPN, YOLOv8 uses the C2f (Cross-Stage Fusion) module, which combines detailed spatial features with high-level semantic information, boosting detection performance, particularly for small objects.
+
+The Head generates the final outputs, including bounding box coordinates, objectness scores, and class probabilities, which are then integrated to provide accurate real-time object detection results.
+
+\subsection{YOLOv8 Training}
+The YOLOv8 model was trained on the dataset with the following configurations:
+\begin{itemize}
+  \item Learning rates: 0.01, 0.003, 0.0001
+  \item Batch sizes: 8, 16, and 32
+  \item Optimizers: Adam, AdamW, SGD, and RMSprop
+  \item Momentum: 0.8 and 0.95
+  \item Weight decay: 0.0001 and 0.01
+\end{itemize}
+
+YOLOv8 employs three primary loss functions:
+\begin{itemize}
+  \item Bounding box regression: CIoU Loss
+  \item Classification: Binary Cross-Entropy (BCE) Loss
+  \item Objectness: Binary Cross-Entropy (BCE) Loss
+\end{itemize}
+
+Evaluation metrics include mAP (mean Average Precision), Precision, Recall, and F1-score.
+
+Training was performed on Google Colab with GPU acceleration, and the trained models were stored in Google Drive for further use. The following libraries were utilized for the YOLOv8 model:
+\begin{itemize}
+  \item Ultralytics: Main library for training, evaluating, and deploying YOLOv8 models
+  \item OpenCV-Python: For image processing
+  \item NumPy: For numerical computations
+  \item Matplotlib: For visualizations and plotting results
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 180723.png}
+  \caption{Training images generated through YOLOv8 model.}
+  \label{fig:training_images}
+\end{figure}
+
+As shown in Fig.~\ref{fig:training_images}, the training images are generated with augmentations to improve model accuracy.
+
+\subsection{Faster R-CNN}The Faster R-CNN is a two-stage object detector that combines a Region Proposal Network (RPN) with a Fast R-CNN detector. An input image is first passed through a CNN backbone (e.g., ResNet or VGG) to extract high-level features.
+
+The RPN generates candidate regions (anchors) of different sizes and aspect ratios, classifying them as object or background and refining their bounding boxes.
+
+The Region of Interest (ROI) Pooling layer then extracts fixed-size feature maps from these proposals, which are passed to the Fast R-CNN head. The head predicts the object class, confidence score, and refined bounding box for each detected object.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 181014.png}
+  \caption{Faster R-CNN framework.}
+  \label{fig:faster_rcnn_framework}
+\end{figure}
+
+As shown in Fig.~\ref{fig:faster_rcnn_framework}, the Faster R-CNN framework consists of a region proposal network, feature extraction layers, and detection heads for bounding box and class prediction.
+
+\subsection{Faster R-CNN Training}
+The Faster R-CNN backbone is based on ResNet-50 with a Feature Pyramid Network (FPN), which enhances multi-scale feature representation for improved detection performance.
+
+\subsubsection{Region Proposal Network (RPN) Settings}
+\begin{itemize}
+  \item The RPN, an integral part of Faster R-CNN, generates Regions of Interest (ROIs) for object detection.
+  \item It uses anchor boxes to propose candidate regions.
+  \item Default RPN parameters (from torchvision) include:
+  \begin{itemize}
+    \item Anchor sizes: [32, 64, 128, 256, 512]
+    \item Aspect ratios: [0.5, 1.0, 2.0]
+    \item Pre-NMS proposals: 2000 (training), 1000 (inference)
+    \item NMS threshold: 0.7
+    \item Batch size for RPN proposals: 256
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Training Configuration}
+\begin{itemize}
+  \item Batch sizes: 8, 16
+  \item Learning rates: 0.0001, 0.003, 0.01
+  \item Optimizers: Adam, AdamW, SGD, RMSprop
+  \begin{itemize}
+    \item Betas: (0.95, 0.999)
+    \item Weight decay: 0.0001
+  \end{itemize}
+  \item Learning rate scheduler: StepLR (Step size: 3, Gamma: 0.1)
+  \item Loss functions:
+  \begin{itemize}
+    \item Classification Loss: Cross-Entropy
+    \item Bounding Box Regression Loss: Smooth L1
+    \item RPN Objectness Loss
+    \item RPN Box Regression Loss
+  \end{itemize}
+\end{itemize}
+
+Libraries used for Faster R-CNN training include:
+\begin{itemize}
+  \item Torch (PyTorch)
+  \item Torchvision
+  \item NumPy
+  \item Matplotlib
+  \item torch.utils.data.DataLoader
+  \item Tqdm
+\end{itemize}
+
+Different fuzzy-rule settings were tested, and the final Low/Medium/High confidence ranges were selected based on the best validation results and stable F1-scores.
+
+\subsection{Fuzzy Decision-Making Methodology}
+The fuzzy inference system is designed to process two main input types:
+\begin{itemize}
+  \item Detected Class Labels: Predictions from YOLOv8 and Faster R-CNN, such as ``Car Accident'', ``Fire Accident'', or ``Car''.
+  \item Confidence Scores: Numerical confidence values between 0 and 1 associated with each prediction.
+\end{itemize}
+
+These inputs are fuzzified to interpret uncertainty and variation in model predictions.
+
+\subsubsection{Fuzzy Membership Functions and Rule Design}
+\textbf{Input Membership Functions:}
+\begin{itemize}
+  \item Low Confidence (0 to 0.5) – Indicates weak detection.
+  \item Medium Confidence (0.3 to 0.7) – Indicates moderately reliable detection.
+  \item High Confidence (0.5 to 1) – Indicates strong and likely correct detection.
+\end{itemize}
+
+\textbf{Output Membership Functions:}
+\begin{itemize}
+  \item Strong Detection: Confident classification of the detected event.
+  \item Uncertain: Ambiguous detection due to weak or conflicting predictions.
+  \item Ignore: Detection is unreliable and disregarded.
+\end{itemize}
+
+\textbf{Fuzzy Rules:}
+\begin{itemize}
+  \item Rule 1: If YOLOv8 detects ``Car Accident'' with High confidence AND Faster R-CNN detects ``Car Accident'' with Medium confidence, THEN Final Decision = Car Accident (Strong Detection).
+  \item Rule 2: If one model predicts with Low confidence, the final decision is Uncertain.
+  \item Rule 3: If both models have Medium confidence, THEN Final Decision = Uncertain.
+  \item Rule 4: If both models detect with High confidence, THEN Final Decision = Strong Detection.
+  \item Rule 5: If both models detect with Low confidence, THEN Final Decision = Ignore.
+\end{itemize}
+
+These rules allow the fuzzy system to balance agreement and uncertainty for reliable classification.
+
+\subsection{Fuzzy System Implementation}
+\begin{itemize}
+  \item Tool Used: scikit-fuzzy in Python
+  \item Defuzzification Method: Centroid
+  \item Edge Case Handling:
+  \begin{itemize}
+    \item If models predict different classes, the output is Uncertain.
+    \item If one model has High confidence and the other Low confidence, the output is Uncertain.
+  \end{itemize}
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 181253.png}
+  \caption{Fuzzy-Logic architecture.}
+  \label{fig:fuzzy_architecture}
+\end{figure}
+
+As shown in Fig.~\ref{fig:fuzzy_architecture}, the fuzzy module fuses confidence scores from YOLOv8 and Faster R-CNN.
+
+
+\subsection{Proposed Model Architecture}
+The proposed framework is a hybrid system that integrates predictions from YOLOv8 and Faster R-CNN using a fuzzy logic-based decision mechanism. Each detector processes the input image independently, generating class labels along with confidence scores. These outputs are subsequently input into the fuzzy logic module, which handles uncertainty and applies predefined rules to determine the final decision. By combining the strengths of both models, the system achieves more accurate, reliable, and interpretable results for real-time accident detection.
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 181435.png}
+  \caption{Proposed model architecture.}
+  \label{fig:proposed_model}
+\end{figure}
+
+Fig.~\ref{fig:proposed_model} shows the hybrid framework combining YOLOv8 and Faster R-CNN via fuzzy logic for real-time accident detection
+Experimental results show that YOLOv8 generally gives higher confidence scores than Faster R-CNN. Using fuzzy logic merges their strengths, producing more consistent and reliable decisions. This combines YOLOv8’s speed with Faster R-CNN’s accurate localization for interpretable detection outputs.
+
+Each frame is analyzed independently, so video tracking metrics (MOTA/MOTP) were not included and will be added in future work.
+
+
+\section{EVALUATION \& PERFORMANCE METRICS}
+To assess model performance, the following metrics were analyzed:
+\begin{itemize}
+  \item Object Detection Models (YOLOv8 \& Faster R-CNN): mAP (mean Average Precision)
+\end{itemize}
+
+\begin{table}[H]
+\centering
+\caption{Best combinations performed on the parameters of YOLOv8 model}
+\resizebox{\linewidth}{!}{
+\begin{tabular}{l c c c c c c}
+\toprule
+Optimizer & LR & BS & Mom. & WD & mAP50 & mAP50-95 \\
+\midrule
+Adam & 0.0001 & 32 & 0.8 & 0.0001 & 0.995 & 0.531 \\
+Adam & 0.0001 & 8  & 0.95 & 0.01   & 0.931 & 0.463 \\
+Adam & 0.0001 & 32 & 0.8 & 0.01   & 0.897 & 0.459 \\
+AdamW & 0.0001 & 32 & 0.8 & 0.01   & 0.956 & 0.563 \\
+AdamW & 0.0001 & 32 & 0.8 & 0.0001 & 0.945 & 0.501 \\
+AdamW & 0.0001 & 16 & 0.95 & 0.01  & 0.934 & 0.556 \\
+SGD & 0.0001 & 32 & 0.8 & 0.0001 & 0.897 & 0.521 \\
+SGD & 0.0001 & 16 & 0.8 & 0.01   & 0.888 & 0.541 \\
+SGD & 0.0001 & 32 & 0.95 & 0.01  & 0.871 & 0.508 \\
+RMSprop & 0.0001 & 32 & 0.95 & 0.0001 & 0.653 & 0.421 \\
+RMSprop & 0.0001 & 16 & 0.95 & 0.01   & 0.568 & 0.382 \\
+RMSprop & 0.0001 & 8  & 0.8 & 0.0001 & 0.556 & 0.334 \\
+\bottomrule
+\end{tabular}}
+\end{table}
+Although YOLOv8 achieves a very high \textbf{mAP@50 of 99.5\%}, the mAP50--95 value is lower because stricter IoU thresholds require more precise bounding-box alignment. In complex accident scenes with occlusions and irregular object shapes, localization accuracy slightly decreases, causing the drop in overall mAP50--95. This reflects bounding-box precision limitations rather than classification issues.
+
+
+
+This table presents the mean Average Precision (mAP) results for the YOLOv8 model. From a total of 144 parameter combinations across different optimizers, the top three results from each optimizer were selected for comparison. The model achieving the highest accuracy was trained using the Adam optimizer, reaching 99.5\% mAP@50.
+
+
+Overview on the ADAM optimizer with the parameters below:
+\begin{itemize}
+  \item Learning rate 0.001
+  \item Batch size 32
+  \item Momentum 0.8
+  \item Weight 0.0001
+\end{itemize}
+Results are MAP50 0.995 and MAP50-99 0.531.
+
+\begin{table}[H]
+\centering
+\caption{Performance of different optimizers on YOLOv8 model}
+\begin{tabular}{l c c c c c}
+\toprule
+Optimizer & Learning rate & Batch size & Momentum & Weight & MAP \\
+\midrule
+Adam & 0.0001 & 4 & 0.8 & 0.0001 & 0.801 \\
+AdamW & 0.0001 & 4 & 0.8 & 0.01 & 0.785 \\
+SGD & 0.0001 & 16 & 0.8 & 0.01 & 0.723 \\
+RMSprop & 0.0001 & 16 & 0.8 & 0.01 & 0.566 \\
+\bottomrule
+\end{tabular}
+\end{table}
+These represent the top results obtained for each optimizer based on the tested parameters. The highest-performing model was trained using the Adam optimizer, achieving an accuracy of 80.1\% (as reported earlier for Faster R-CNN).
+
+\subsection{Precision}
+Precision quantifies the correctness of positive predictions. It is defined as the ratio of true positive predictions to the total number of predicted positives.
+\begin{itemize}
+  \item Formula: Precision = TP / (TP + FP)
+\end{itemize}
+\subsection{Precision}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 181631.png}
+  \caption{Precision curve.}
+  \label{fig:precision_curve}
+\end{figure}
+
+As shown in Fig.~\ref{fig:precision_curve}, the precision curve represents the model's ability to correctly identify positive predictions across confidence thresholds.
+
+\subsection{Recall}
+
+Recall (Sensitivity) evaluates the model's ability to correctly identify positive instances. It is calculated as the ratio of true positives to the total actual positives:
+
+\begin{itemize}
+  \item Formula: Recall = TP / (TP + FN)
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 181854.png}
+  \caption{Recall curve.}
+  \label{fig:recall_curve}
+\end{figure}
+
+The Recall-Confidence Curve for the proposed hybrid model shows how recall varies across different confidence thresholds for the classes: Accident, Fire Accident, and Car. The model achieves a maximum recall of 0.97 at a confidence threshold of 0.0, with Car consistently achieving the highest recall.
+
+\subsection{Precision vs Recall}
+
+The precision-recall curve illustrates detection performance for the three classes. The model achieves the highest accuracy for Car (AP: 0.973), followed by Fire Accident (AP: 0.932), and Accident (AP: 0.803). The bold blue curve represents the mean Average Precision (mAP@0.5) of 0.903.  
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 182046.png}
+  \caption{Precision-Recall Curve.}
+  \label{fig:precision_recall_curve}
+\end{figure}
+
+\subsection{F1-Score}
+
+The F1-Score is the harmonic mean of Precision and Recall, providing a balanced measure especially useful in cases of class imbalance:
+
+\begin{itemize}
+  \item Formula: F1-Score = 2 * (Precision * Recall) / (Precision + Recall)
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 182152.png}
+  \caption{F1-Score Curve.}
+  \label{fig:f1_score_curve}
+\end{figure}
+
+As shown in Fig.~\ref{fig:f1_score_curve}, the F1-Score curve demonstrates balanced detection performance across all classes, highlighting the effectiveness of the proposed hybrid model.
+
+The F1-Confidence Curve indicates that the optimal trade-off between precision and recall occurs at a confidence threshold of 0.404, where the overall F1 score peaks at 0.84. Among individual classes, Car demonstrates the highest and most stable F1 performance, consistently approaching 0.9.
+
+\subsection{Confusion Matrix}
+A confusion matrix summarizes a classification model's performance by comparing predicted and actual values.
+\subsection{Confusion Matrix}
+
+\subsection{Confusion Matrix}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 182327.png}
+  \caption{Confusion Matrix of the hybrid model.}
+  \label{fig:confusion_matrix}
+\end{figure}
+
+Fig.~\ref{fig:confusion_matrix} shows strong detection for Car (94\%) and Fire Accident (87\%), with lower performance for Accident (65\%).
+
+
+As shown in Fig.~\ref{fig:confusion_matrix}, the hybrid model achieves strong detection performance for Car (94\% accuracy) and Fire Accident (87\% accuracy). The Accident class shows lower performance, correctly identifying 65\% of instances, with 35\% misclassified as Background. Additionally, 27\% of Background instances are incorrectly predicted as Car.
+
+\subsection{Loss Functions}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Screenshot 2025-11-27 183039.png}
+    \caption{Training and validation loss curves.}
+    \label{fig:loss_graphs}
+\end{figure}
+
+Fig.~\ref{fig:loss_graphs} illustrates the convergence of losses during training, indicating stable optimization.
+
+\vspace{-1em} % Reduce unwanted gap
+\begin{itemize}
+  \item train/box loss: Represents the error in bounding box regression, decreasing from above 1.6 to approximately 0.8.
+  \item train/cls loss: Classification loss during training starts above 4 and drops rapidly below 1.
+  \item train/dfl loss: Distribution Focal Loss decreases from around 1.9 to about 1.2.
+  \item metrics/precision(B): Precision rises quickly during early training and stabilizes around 0.9.
+  \item metrics/recall(B): Recall improves gradually and levels off near 0.9.
+  \item val/box loss: Validation box loss reduces and stabilizes around 1.4--1.5.
+  \item val/cls loss: Validation classification loss drops sharply from nearly 7 to around 1.
+  \item val/dfl loss: Validation DFL stabilizes at a slightly higher value, around 1.8--2.0.
+  \item metrics/mAP50(B): Rises rapidly and plateaus near 0.85.
+  \item metrics/mAP50-95(B): Increases steadily to approximately 0.55.
+
+\subsection{Real-Time FPS Performance}
+
+To evaluate the practical usability of the proposed hybrid model in surveillance systems, the real-time processing speed was measured. The hybrid system achieves an average of \textbf{24--26 FPS} on a 30 FPS video stream, which is sufficient for real-time monitoring. Individually, YOLOv8 runs at approximately \textbf{42 FPS}, while Faster R-CNN operates at around \textbf{7 FPS}. The fuzzy fusion module introduces less than \textbf{1 ms} overhead, ensuring that the overall system maintains real-time performance.
+
+Confidence intervals and cross-validation were not used because of the limited dataset size. Future versions will include these for better statistical validation.
+
+\end{itemize}
+\vspace{-1em}
+
+\section{Final Fuzzy Decision \& Surface}
+The hybrid system uses fuzzy logic to combine confidence scores from YOLOv8 and Faster R-CNN for more reliable detection. The fuzzy decision surface shows how confidence levels from both models affect the final output. Three membership functions are used: Ignore (low confidence), Uncertain (moderate confidence), and Strong Detection (high confidence). This approach smoothly handles ambiguity and improves robustness in challenging scenarios.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 182613.png}
+    \caption{Final decision graph using fuzzy logic.}
+    \label{fig:fuzzydecision}
+\end{figure}
+
+Fig.~\ref{fig:fuzzydecision} shows the final decision outputs of the hybrid model after fuzzy logic fusion.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.45\textwidth]{Screenshot 2025-11-27 182725.png}
+    \caption{Fuzzy decision surface visualization.}
+    \label{fig:fuzzysurface}
+\end{figure}
+
+Fig.~\ref{fig:fuzzysurface} visualizes how the fuzzy logic module maps confidence scores from YOLOv8 and Faster R-CNN to final detection decisions.
+
+As shown in Fig.~\ref{fig:fuzzysurface}, the fuzzy decision surface illustrates how the final decision changes according to confidence values from both models.
+
+\section{Conclusion}
+The fuzzy logic fusion of YOLOv8 and Faster R-CNN enhances reliability and accuracy in real-time accident detection. By managing uncertainty through fuzzy inference, the hybrid model reduces false positives and demonstrates robust performance under challenging visual conditions. The reported mAP@0.5 of 0.903 confirms the effectiveness of the approach, particularly for Car and Fire Accident classes, while highlighting areas for improvement in general Accident detection.
+
+\begin{thebibliography}{99}
+\bibitem{ref1} V. Efthymiou, S. Basagiannis and S. Petridou, "CNN Architectures for Vehicle Detection in V2X Environments: A Comparative Study," 2024 IEEE Conference on Standards for Communications and Networking (CSCN), Belgrade, Serbia, 2024, pp. 113-119, doi: 10.1109/CSCN63874.2024.10849688.
+\bibitem{ref2} B. M. G, P. R. Sanikommu and G. V. Teja, "AI-Enhanced Real-Time Accident Detection with Smart Emergency Response System," 2024 IEEE International Conference on Intelligent Signal Processing and Effective Communication Technologies (INSPECT), Gwalior, India, 2024, pp. 1-6, doi: 10.1109/INSPECT63485.2024.10896184.
+\bibitem{ref3} D. Tian, C. Zhang, X. Duan and X. Wang, "An Automatic Car Accident Detection Method Based on Cooperative Vehicle Infrastructure Systems," in IEEE Access, vol. 7, pp. 127453-127463, 2019, doi: 10.1109/ACCESS.2019.2939532.
+\bibitem{ref4} N. Vijayan, S. Pandey and P. R M, "Collision Detection and Prevention for Automobiles using Machine Learning," 2024 International Conference on Trends in Quantum Computing and Emerging Business Technologies, Pune, India, 2024, pp. 1-4, doi: 10.1109/TQCEBT59414.2024.10545080.
+\bibitem{ref5} Liu, Xingyu, et al. "Enhancing Intelligent Road Target Monitoring: A Novel BGS YOLO Approach Based on the YOLOv8 Algorithm." IEEE Open Journal of Intelligent Transportation Systems (2024).
+\bibitem{ref6} Kavitha, M., et al. "Proactive Highway Collision Avoidance using YOLOv8 and Ultrasonic Sensors." 2024 13th International Conference on System Modeling Advancement in Research Trends (SMART). IEEE, 2024.
+\bibitem{ref7} Peng, Jun, et al. "Road Object Detection Algorithm Based on Improved YOLOv8." 2024 IEEE 19th Conference on Industrial Electronics and Applications (ICIEA). IEEE, 2024.
+\bibitem{ref8} Girija, M., and V. Divya. "Road traffic accident prediction using deep learning." 2024 International Conference on Cognitive Robotics and Intelligent Systems (ICC-ROBINS). IEEE, 2024.
+\bibitem{ref9} Ning, Zhaole, et al. "TP-YOLOv8: a lightweight and accurate model for traffic accident recognition." The Journal of Supercomputing 81.4 (2025): 1-31.
+\bibitem{ref10} Chen, Jiahui, et al. "Surveillance-Based Road Accident Detection Method Using Improved YOLOv8 for IIoT Applications." 2024 IEEE/CIC International Conference on Communications in China (ICCC). IEEE, 2024.
+\bibitem{ref11} Prathilothamai, M., et al. "Traffic Rules Violation Detection System using YOLO v8 Model." 2024 10th International Conference on Electrical Energy Systems (ICEES). IEEE, 2024.
+\bibitem{ref12} Mishra, Siddhant, and Divya Kamal. "Vehicle Damage Identification using Deep Learning Techniques." 2024 IEEE International Students’ Conference on Electrical, Electronics and Computer Science (SCEECS). IEEE, 2024.
+\bibitem{ref13} Shankar, K., et al. "YOLOv8-Driven Integration of Advanced Detection Technologies for Enhanced Terrain Safety." 2024 5th International Conference on Mobile Computing and Sustainable Informatics (ICMCSI). IEEE, 2024.
+\bibitem{ref14} Yogeshwaran, S., and R. Vasanthi. "YOLOv8-Powered Real-Time Car Damage Detection." 2025 3rd International Conference on Intelligent Data Communication Technologies and Internet of Things (IDCIoT). IEEE, 2025.
+\bibitem{ref15} Le, Trung-Nghia, et al. "Attention R-CNN for accident detection." 2020 IEEE Intelligent Vehicles Symposium (IV). IEEE, 2020.
+\bibitem{ref16} Maity, Madhusri, Sriparna Banerjee, and Sheli Sinha Chaudhuri. "Faster R-CNN and YOLO based vehicle detection: A survey." 2021 5th International Conference on Computing Methodologies and Communication (ICCMC). IEEE, 2021.
+\bibitem{ref17} Sharma, Yashika, and Richa Singh. "Smart vehicle accident detection system using Faster R-CNN." 2021 10th International Conference on System Modeling Advancement in Research Trends (SMART). IEEE, 2021.
+\end{thebibliography}
+
+\end{document}
