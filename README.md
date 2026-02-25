@@ -43,20 +43,22 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
   doi       = {TBD}
 }
 
-## Repository Contents
+## Repository Structure
 
+```text
 ├── Dataset/
-│   └── high_quality_pictures.zip       # Custom dataset (~366 MB, unzip before use)
-├── ICCES-1032 Original Source File/    # Original conference submission files
-├── Results/                            # Evaluation outputs, visualizations, metrics
-├── 230.pdf                             # Conference paper PDF
-├── FUZZY_Logic.ipynb                   # Fuzzy logic fusion implementation
-├── Faster_R_CNN.ipynb                  # Faster R-CNN training & evaluation
-├── Yolo_V8_training_(1).ipynb          # YOLOv8 training pipeline
-├── confidence_of_the_both_models_.ipynb # Confidence score comparison & analysis
-├── .gitignore
-├── .gitattributes                      # Git LFS configuration for large files
-└── README.md                           # This file
+│   └── high_quality_pictures.zip          # Custom dataset (~366 MB – unzip before use)
+├── ICCES-1032 Original Source File/       # Original conference submission materials
+├── Results/                               # Model outputs, confusion matrices, visualizations, metrics
+├── 230.pdf                                # Conference paper PDF (ICCCES 2026)
+├── FUZZY_Logic.ipynb                      # Fuzzy logic fusion & decision engine
+├── Faster_R_CNN.ipynb                     # Faster R-CNN training, evaluation & inference
+├── Yolo_V8_training_(1).ipynb             # YOLOv8 training pipeline & experiments
+├── confidence_of_the_both_models_.ipynb   # Confidence score analysis & model comparison
+├── .gitignore                             # Ignore rules for caches, temp files, large binaries
+├── .gitattributes                         # Git LFS tracking rules for large files (*.zip)
+└── README.md                              # This file
+
 ## Installation
 
 **Prerequisites**
@@ -88,11 +90,13 @@ pip install -r requirements.txt  # If requirements.txt is added; otherwise, inst
    Example command for inference (adapt from notebooks):
     python infer.py --model yolov8.pt --source video.mp4
 
-**Results**
-Model,mAP@0.5,False Positives,Inference Speed (ms)
-Faster R-CNN,80.1%,High,150
-YOLOv8,99.5%,Moderate,20
-Hybrid (Fuzzy),90.3%,Low,35
+## Results
+
+| Model              | mAP@0.5 | False Positives | Inference Speed (ms) | Notes                              |
+|--------------------|---------|-----------------|----------------------|------------------------------------|
+| Faster R-CNN       | 80.1%   | High            | ~150                 | Strong on precision, slower        |
+| YOLOv8             | 99.5%   | Moderate        | ~20                  | Very fast, higher false positives  |
+| **Hybrid (Fuzzy)** | **90.3%** | **Low**       | ~35                  | Best balance – reduced false alarms by ~40% in low-visibility scenarios |
 The hybrid approach reduces false positives by 40% in low-visibility scenarios while maintaining real-time performance.
 
 **Contributors**
