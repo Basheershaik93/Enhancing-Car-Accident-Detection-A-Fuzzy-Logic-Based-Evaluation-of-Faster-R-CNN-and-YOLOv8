@@ -1,6 +1,6 @@
 # Enhancing Car Accident Detection: A Fuzzy Logic-Based Evaluation of Faster R-CNN and YOLOv8
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Basheershaik93/Enhancing-Car-Accident-Detection-A-Fuzzy-Logic-Based-Evaluation-of-Faster-R-CNN-and-YOLOv8/blob/main/LICENSE)
 [![Conference: ICCCES 2026](https://img.shields.io/badge/Conference-ICCCES%202026-blue)](https://icoces.com/)
 [![IEEE Xplore](https://img.shields.io/badge/IEEE-Xplore-Pending-orange)](https://ieeexplore.ieee.org/)
 
