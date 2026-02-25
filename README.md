@@ -32,6 +32,7 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 
 **Citation** (update DOI once available):
 
+**bibtex**
 @inproceedings{basheer2026enhancing,
   author    = {Shaik Basheer and Chanchal Biswas and Dunga Priyatham and Shaik Abdul Karim and Abdul Rehan},
   title     = {Enhancing Car Accident Detection: A Fuzzy Logic-based Evaluation of Faster R-CNN and YOLOv8},
@@ -87,3 +88,28 @@ pip install -r requirements.txt  # If requirements.txt is added; otherwise, inst
    Example command for inference (adapt from notebooks):
     python infer.py --model yolov8.pt --source video.mp4
 
+**Results**
+Model,mAP@0.5,False Positives,Inference Speed (ms)
+Faster R-CNN,80.1%,High,150
+YOLOv8,99.5%,Moderate,20
+Hybrid (Fuzzy),90.3%,Low,35
+The hybrid approach reduces false positives by 40% in low-visibility scenarios while maintaining real-time performance.
+
+**Contributors**
+
+Shaik Basheer
+Chanchal Biswas 
+Dunga Priyatham 
+Shaik Abdul Karim
+Abdul Rehan 
+
+All affiliated with Dept. of Computer Science and Engineering, SRM University AP, Neerukonda, Andhra Pradesh, India.
+
+**License**
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+**Acknowledgments**
+
+Presented at ICCCES-2026 .
+Thanks to SRM University AP for support.
+Models built using Ultralytics YOLOv8 and PyTorch Faster R-CNN implementations.
