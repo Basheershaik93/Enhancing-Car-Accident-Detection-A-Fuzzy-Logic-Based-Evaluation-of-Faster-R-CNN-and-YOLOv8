@@ -32,7 +32,6 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
 
 **Citation** (update DOI once available):
 
-```bibtex
 @inproceedings{basheer2026enhancing,
   author    = {Shaik Basheer and Chanchal Biswas and Dunga Priyatham and Shaik Abdul Karim and Abdul Rehan},
   title     = {Enhancing Car Accident Detection: A Fuzzy Logic-based Evaluation of Faster R-CNN and YOLOv8},
@@ -42,6 +41,7 @@ Experiments on a custom dataset containing **Car**, **Car Accident**, and **Fire
   publisher = {IEEE},
   doi       = {TBD}
 }
+
 ## Repository Contents
 
 ├── Dataset/
